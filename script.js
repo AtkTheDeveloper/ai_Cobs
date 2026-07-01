@@ -52,11 +52,15 @@ function createPage() {
   const modalText = document.createElement('p');
   modalText.textContent = 'I am incredibly sorry for hurting you and causing you disappointment. I value you more than I can say, and I hate knowing that I let you down today. Please know that none of this was intentional, and I truly hope you can find it in your heart to forgive me so we can move forward. 🫶.';
 
+  const secretMessage = document.createElement('p');
+  secretMessage.className = 'secret-message';
+  secretMessage.innerHTML = 'Send me this text on Whatsapp: <strong>"Donnie Yen is awesome"</strong>';
+
   const closeButton = document.createElement('button');
   closeButton.className = 'close-btn';
   closeButton.textContent = 'Close';
 
-  modalCard.append(modalTitle, modalText, closeButton);
+  modalCard.append(modalTitle, modalText, secretMessage, closeButton);
   overlay.appendChild(modalCard);
 
   actions.append(yesButton, noButton);
