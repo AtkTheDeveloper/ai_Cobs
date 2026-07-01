@@ -209,6 +209,27 @@ h1 {
   cursor: pointer;
 }
 
+.confetti {
+  position: fixed;
+  pointer-events: none;
+  z-index: 6;
+}
+
+@keyframes confetti-fall {
+  to {
+    transform: translateY(100vh) rotateZ(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-swing {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(100px) rotateZ(180deg); }
+  50% { transform: translateX(-100px) rotateZ(360deg); }
+  75% { transform: translateX(50px) rotateZ(540deg); }
+  100% { transform: translateX(0) rotateZ(720deg); }
+}
+
 @media (max-width: 520px) {
   .card {
     padding: 1.4rem;

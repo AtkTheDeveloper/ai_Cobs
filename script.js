@@ -94,6 +94,40 @@ function createPage() {
 
   function showModal() {
     overlay.classList.add('visible');
+    createConfetti();
+  }
+
+  function createConfetti() {
+    const confettiCount = 50;
+    const colors = ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#9400d3', '#ff1493', '#00ffff', '#ff69b4', '#ff6fa5', '#ff8fa3', '#ffb3c1', '#ffc0cb', '#fff0f5'];
+    
+    for (let i = 0; i < confettiCount; i++) {
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      const size = Math.random() * 10 + 5;
+      const left = Math.random() * window.innerWidth;
+      const delay = Math.random() * 0.1;
+      const duration = Math.random() * 1.5 + 1.5;
+      
+      confetti.style.left = `${left}px`;
+      confetti.style.top = '-10px';
+      confetti.style.width = `${size}px`;
+      confetti.style.height = `${size}px`;
+      confetti.style.backgroundColor = color;
+      confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+      confetti.style.opacity = '1';
+      confetti.style.animation = `confetti-swing 1s ease-in, confetti-fall ${duration}s ease-in forwards`;
+      confetti.style.animationDelay = `${delay}s`;
+      confetti.style.filter = `hue-rotate(${Math.random() * 60}deg)`;
+      
+      document.body.appendChild(confetti);
+      
+      setTimeout(() => {
+        confetti.remove();
+      }, (duration + delay) * 1000);
+    }
   }
 
   function hideModal() {
