@@ -16,7 +16,7 @@ function createPage() {
 
   const intro = document.createElement('p');
   intro.className = 'intro';
-  intro.textContent = 'A little moment of sweetness for someone who deserves all the happiness in the world.';
+//   intro.textContent = 'A little moment of sweetness for someone who deserves all the happiness in the world.';
 
   const imageWrap = document.createElement('div');
   imageWrap.className = 'image-wrap';
@@ -50,7 +50,7 @@ function createPage() {
   modalTitle.textContent = 'Thank you';
 
   const modalText = document.createElement('p');
-  modalText.textContent = 'Your kindness means the world to me. I hope this little moment brings you a smile.';
+  modalText.textContent = 'I am incredibly sorry for hurting you and causing you disappointment. I value you more than I can say, and I hate knowing that I let you down today. Please know that none of this was intentional, and I truly hope you can find it in your heart to forgive me so we can move forward. 🫶.';
 
   const closeButton = document.createElement('button');
   closeButton.className = 'close-btn';
@@ -93,6 +93,7 @@ function createPage() {
   }
 
   function showModal() {
+    page.classList.add('is-hidden');
     overlay.classList.add('visible');
     createConfetti();
   }
@@ -131,6 +132,7 @@ function createPage() {
   }
 
   function hideModal() {
+    page.classList.remove('is-hidden');
     overlay.classList.remove('visible');
   }
 
