@@ -37,7 +37,7 @@ function createPage() {
   yesButton.textContent = 'YES';
 
   const noButton = document.createElement('button');
-  noButton.className = 'btn btn-no is-starting';
+  noButton.className = 'btn btn-no';
   noButton.textContent = 'NO';
 
   const overlay = document.createElement('div');
@@ -59,25 +59,34 @@ function createPage() {
   modalCard.append(modalTitle, modalText, closeButton);
   overlay.appendChild(modalCard);
 
-  actions.appendChild(yesButton);
-  card.append(eyebrow, title, intro, imageWrap, prompt, actions, noButton);
+  actions.append(yesButton, noButton);
+  card.append(eyebrow, title, intro, imageWrap, prompt, actions);
   page.appendChild(card);
   app.append(page, overlay);
 
-  function positionNoButtonAtStart() {
-    noButton.style.left = '50%';
-    noButton.style.top = '50%';
-    noButton.style.transform = 'translate(-50%, -50%)';
-    noButton.classList.add('is-starting');
-  }
+  let hasButtonMoved = false;
 
   function moveNoButton() {
-    noButton.classList.remove('is-starting');
-    const padding = 16;
-    const maxX = Math.max(0, card.clientWidth - noButton.offsetWidth - padding);
-    const maxY = Math.max(0, card.clientHeight - noButton.offsetHeight - padding);
-    const x = Math.max(padding, Math.floor(Math.random() * maxX));
-    const y = Math.max(padding, Math.floor(Math.random() * maxY));
+    if (!hasButtonMoved) {
+      hasButtonMoved = true;
+      noButton.classList.add('is-moving');
+      noButton.style.position = 'absolute';
+    }
+    
+    const minPadding = 16;
+    const btnWidth = noButton.offsetWidth;
+    const btnHeight = noButton.offsetHeight;
+    const cardWidth = card.clientWidth;
+    const cardHeight = card.clientHeight;
+
+    // Calculate bounds within the card, accounting for button size and centering via transform
+    const minX = minPadding + btnWidth / 2;
+    const maxX = cardWidth - minPadding - btnWidth / 2;
+    const minY = minPadding + btnHeight / 2;
+    const maxY = cardHeight - minPadding - btnHeight / 2;
+
+    const x = Math.floor(Math.random() * (maxX - minX) + minX);
+    const y = Math.floor(Math.random() * (maxY - minY) + minY);
 
     noButton.style.left = `${x}px`;
     noButton.style.top = `${y}px`;
@@ -114,11 +123,10 @@ function createPage() {
 
   imageWrap.appendChild(image);
 
-  window.addEventListener('resize', () => {
-    positionNoButtonAtStart();
-  });
-
-  requestAnimationFrame(positionNoButtonAtStart);
+  // Optional: Reset on window resize if needed
+  // window.addEventListener('resize', () => {
+  //   // Reset movement on resize if desired
+  // });
 }
 
 createPage();
